@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: database
+    image: mysql:8.1.0-oracle
+    environment:
+      - MYSQL_ROOT_PASSWORD=katasandi
+      - MYSQL_DATABASE=makhluk
+    networks:
+      - domain
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysql", "-u", "root",  "-pkatasandi", "-e", "show schemas"]
+      interval: 10s
+
+  app:
+    container_name: app
+    image: rizghz/api:1.0
+    networks:
+      - domain
+    ports:
+      - "8008:8008"
+    depends_on:
+      database:
+        condition: service_healthy
+
+networks:
+  domain:
