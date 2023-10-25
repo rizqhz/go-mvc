@@ -40,7 +40,7 @@ jobs:
           key: ${{ secrets.SERVER_SECRETKEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            docker container stop ${{ secrets.DOCKER_CONTAINER_NAME }}
-            docker container rm ${{ secrets.DOCKER_CONTAINER_NAME }}
-            docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
-            docker run --name ${{ secrets.DOCKER_CONTAINER_NAME }} -p 8008:8008 -d -e DB_HOST=${{ secrets.DB_HOST }} -e DB_PORT=3306 -e DB_USER=${{ secrets.DB_USER }} -e DB_PASS=${{ secrets.DB_PASS }} -e DB_NAME=${{ secrets.DB_NAME }} -e SECRET_KEY=${{ secrets.JWT_SECRET }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
+            sudo docker container stop ${{ secrets.DOCKER_CONTAINER_NAME }}
+            sudo docker container rm ${{ secrets.DOCKER_CONTAINER_NAME }}
+            sudo docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
+            sudo docker run --name ${{ secrets.DOCKER_CONTAINER_NAME }} -p 8008:8008 -d -e DB_HOST=${{ secrets.DB_HOST }} -e DB_PORT=3306 -e DB_USER=${{ secrets.DB_USER }} -e DB_PASS=${{ secrets.DB_PASS }} -e DB_NAME=${{ secrets.DB_NAME }} -e SECRET_KEY=${{ secrets.JWT_SECRET }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
